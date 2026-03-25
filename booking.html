@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - MediConnect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0A2540;
+            --success-green: #10B981;
+            --neutral-gray: #475569;
+            --light-gray: #F8FAFC;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,123,255,0.3);
+        }
+        
+        .btn-success {
+            background: var(--success-green);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-success:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,123,255,0.15);
+        }
+        
+        .booking-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .booking-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .success-animation {
+            animation: successPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            z-index: 50;
+            padding: 12px 0;
+        }
+        
+        .mobile-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 8px;
+            color: var(--neutral-gray);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .mobile-nav-item.active {
+            color: var(--primary-blue);
+        }
+        
+        .mobile-nav-icon {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 4px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success-green);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 100;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .booking-content {
+                padding-bottom: 100px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 booking-content">
+    <!-- Navigation -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="MediConnect" class="h-8 w-8 mr-3">
+                    <span class="font-display font-semibold text-xl tracking-tight text-slate-900">MediConnect</span>
+                </div>
+                <div class="hidden lg:flex items-center space-x-5 text-sm font-medium">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap" data-i18n="nav_home">Home</a>
+                    <a href="search.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap" data-i18n="nav_find">Find Doctors</a>
+                    <a href="diagnose.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap">Diagnose Now</a>
+                    <a href="admin.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap" data-i18n="nav_admin">Admin</a>
+                    <button onclick="window.location.href='index.html'" class="btn-primary text-white px-6 py-2 rounded-full font-medium shadow-sm hover:shadow-md transition-all" data-i18n="nav_book_now">Book Now</button>
+                </div>
+                <div class="md:hidden">
+                    <button onclick="goBack()" class="text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Progress Steps -->
+        <div class="mb-8">
+            <div class="flex items-center justify-center">
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">1</div>
+                    <div class="w-16 h-1 bg-blue-600"></div>
+                </div>
+                <div class="flex items-center">
+                    <div class="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full font-semibold">2</div>
+                    <div class="w-16 h-1 bg-gray-300"></div>
+                </div>
+                <div class="flex items-center justify-center w-8 h-8 bg-gray-300 text-gray-600 rounded-full font-semibold">3</div>
+            </div>
+            <div class="flex justify-center mt-2">
+                <div class="flex justify-between w-64">
+                    <span class="text-sm text-indigo-700 font-semibold whitespace-nowrap" data-i18n="booking_step_details">Details</span>
+                    <span class="text-sm text-gray-500" data-i18n="booking_step_confirm">Confirm</span>
+                    <span class="text-sm text-gray-500" data-i18n="booking_step_done">Done</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <div id="booking-form" class="booking-card p-8 mb-8" data-animate="fade-up">
+            <h1 class="font-display text-3xl font-bold text-gray-900 mb-2" data-i18n="booking_title">Book Your Appointment</h1>
+            <p class="text-gray-600 mb-8" data-i18n="booking_subtitle">Please provide your details to complete the booking.</p>
+
+            <!-- Appointment Summary -->
+            <div class="bg-blue-50 rounded-lg p-6 mb-8">
+                <h2 class="font-display text-lg font-semibold text-blue-900 mb-4" data-i18n="booking_summary_title">Appointment Summary</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-blue-700" data-i18n="booking_summary_doctor">Doctor</p>
+                        <p id="summary-doctor" class="font-semibold text-blue-900"></p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-700" data-i18n="booking_summary_specialty">Specialty</p>
+                        <p id="summary-specialty" class="font-semibold text-blue-900"></p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-700" data-i18n="booking_summary_date">Date</p>
+                        <p id="summary-date" class="font-semibold text-blue-900"></p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-blue-700" data-i18n="booking_summary_time">Time</p>
+                        <p id="summary-time" class="font-semibold text-blue-900"></p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-blue-200">
+                    <div class="flex justify-between items-center">
+                        <span class="text-blue-700" data-i18n="booking_summary_fee">Consultation Fee:</span>
+                        <span id="summary-fee" class="font-bold text-blue-900 text-lg"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Patient Information Form -->
+            <form id="patient-form" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_first_name">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required
+                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_last_name">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required
+                               class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_email">Email Address *</label>
+                    <input type="email" id="email" name="email" required
+                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required
+                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label for="dateOfBirth" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_dob">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth"
+                           class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+
+                <div>
+                    <label for="reason" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_reason">Reason for Visit *</label>
+                    <textarea id="reason" name="reason" rows="3" required
+                              placeholder="Please describe your symptoms or reason for consultation"
+                              data-i18n-placeholder="placeholder_reason"
+                              class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+
+                <div>
+                    <label for="notes" class="block text-sm font-medium text-gray-700 mb-2" data-i18n="form_notes">Additional Notes (Optional)</label>
+                    <textarea id="notes" name="notes" rows="2"
+                              placeholder="Any additional information you'd like the doctor to know"
+                              data-i18n-placeholder="placeholder_notes"
+                              class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                </div>
+
+                <div class="medilab-panel" data-medilab-panel data-medilab-intent="prep" data-animate="fade-up">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+                        <div class="flex items-center gap-3">
+                            <img src="resources/medilab-logo.svg" alt="MediLab AI" class="w-8 h-8">
+                            <div>
+                                <p class="text-xs uppercase tracking-wide text-blue-600 font-semibold">MediLab AI</p>
+                                <h2 class="font-display text-lg font-semibold text-gray-900">Visit Prep Checklist</h2>
+                            </div>
+                        </div>
+                        <span class="medilab-key-badge" data-medilab-key-status>API key not set</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Generate a personalized checklist and questions to bring to your appointment.
+                    </p>
+                    <form class="grid grid-cols-1 md:grid-cols-6 gap-4">
+                        <div class="md:col-span-4">
+                            <input type="text" class="medilab-input" data-medilab-input
+                                   placeholder="Example: persistent knee pain, need imaging report advice">
+                        </div>
+                        <div class="md:col-span-2">
+                            <button type="submit" class="btn-primary text-white px-4 py-2 rounded-lg font-semibold w-full">
+                                Build Checklist
+                            </button>
+                        </div>
+                    </form>
+                    <div class="mt-4 medilab-output" data-medilab-output aria-live="polite">
+                        <p class="text-gray-500 text-sm">MediLab AI checklist will appear here.</p>
+                    </div>
+                    
+                </div>
+
+                <!-- Emergency Contact -->
+                <div class="bg-gray-50 rounded-lg p-6">
+                    <h3 class="font-semibold text-gray-900 mb-4">Emergency Contact (Optional)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="emergencyName" class="block text-sm font-medium text-gray-700 mb-2">Contact Name</label>
+                            <input type="text" id="emergencyName" name="emergencyName"
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        <div>
+                            <label for="emergencyPhone" class="block text-sm font-medium text-gray-700 mb-2">Contact Phone</label>
+                            <input type="tel" id="emergencyPhone" name="emergencyPhone"
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="flex items-start">
+                    <input type="checkbox" id="terms" name="terms" required
+                           class="mt-1 mr-3 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <label for="terms" class="text-sm text-gray-600">
+                    <span data-i18n="booking_terms_prefix">I agree to the</span>
+                    <a href="#" class="text-blue-600 hover:underline" data-i18n="booking_terms_terms">Terms of Service</a>
+                    <span data-i18n="booking_terms_and">and</span>
+                    <a href="#" class="text-blue-600 hover:underline" data-i18n="booking_terms_privacy">Privacy Policy</a>.
+                    <span data-i18n="booking_terms_suffix">I understand that I can cancel or reschedule my appointment up to 24 hours in advance.</span>
+                </label>
+            </div>
+
+                <!-- Submit Button -->
+                <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                    <button type="button" onclick="goBack()" 
+                            class="flex-1 bg-gray-200 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-300 transition-colors">
+                        <span data-i18n="booking_back">Back</span>
+                    </button>
+                    <button type="submit" 
+                            class="flex-1 btn-primary text-white py-3 px-6 rounded-lg font-semibold">
+                        <span data-i18n="booking_confirm">Confirm Booking</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Confirmation (Hidden Initially) -->
+        <div id="confirmation-screen" class="hidden max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="booking-card p-8 text-center success-animation" data-animate="fade-up">
+                <div class="mb-6">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    </div>
+                    <h1 class="font-display text-3xl font-bold text-gray-900 mb-2" data-i18n="booking_confirmed_title">Booking Confirmed!</h1>
+                    <p class="text-gray-600" data-i18n="booking_confirmed_body">Your appointment has been successfully scheduled.</p>
+                </div>
+
+                <!-- Appointment Details -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8 text-left">
+                    <h2 class="font-display text-lg font-semibold text-gray-900 mb-4" data-i18n="booking_details_title">Appointment Details</h2>
+                    <div class="space-y-3">
+                        <div class="flex justify-between">
+                            <span class="text-gray-600" data-i18n="booking_details_id">Appointment ID:</span>
+                            <span id="confirmation-id" class="font-semibold"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600" data-i18n="booking_details_doctor">Doctor:</span>
+                            <span id="confirmation-doctor" class="font-semibold"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600" data-i18n="booking_details_datetime">Date & Time:</span>
+                            <span id="confirmation-datetime" class="font-semibold"></span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-600" data-i18n="booking_details_patient">Patient:</span>
+                            <span id="confirmation-patient" class="font-semibold"></span>
+                        </div>
+                        <div class="flex justify-between border-t pt-3 mt-3">
+                            <span class="text-gray-600" data-i18n="booking_details_fee">Consultation Fee:</span>
+                            <span id="confirmation-fee" class="font-semibold text-lg"></span>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Next Steps -->
+            <div class="bg-blue-50 rounded-lg p-6 mb-8 text-left">
+                <h3 class="font-semibold text-blue-900 mb-3" data-i18n="booking_next_title">What happens next?</h3>
+                <ul class="space-y-2 text-blue-800">
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span data-i18n="booking_next_email">You'll receive a confirmation email with appointment details</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span data-i18n="booking_next_contact">The clinic will contact you 24 hours before your appointment</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="w-5 h-5 text-blue-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span data-i18n="booking_next_bring">Bring a valid ID and insurance card to your appointment</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button onclick="downloadConfirmation()" 
+                        class="flex-1 border border-blue-600 text-blue-600 py-3 px-6 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                    <span data-i18n="booking_download">Download Confirmation</span>
+                </button>
+                <button onclick="addToCalendar()" 
+                        class="flex-1 border border-green-600 text-green-600 py-3 px-6 rounded-lg font-semibold hover:bg-green-50 transition-colors">
+                    <span data-i18n="booking_calendar">Add to Calendar</span>
+                </button>
+                <button onclick="goHome()" 
+                        class="flex-1 btn-primary text-white py-3 px-6 rounded-lg font-semibold">
+                    <span data-i18n="booking_home">Back to Home</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span id="toast-message"></span>
+        </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav md:hidden">
+        <div class="flex justify-around">
+            <a href="index.html" class="mobile-nav-item">
+                <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span data-i18n="mobile_home">Home</span>
+            </a>
+            <a href="search.html" class="mobile-nav-item">
+                <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <span data-i18n="mobile_search">Search</span>
+            </a>
+            <a href="admin.html" class="mobile-nav-item">
+                <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+                <span data-i18n="mobile_admin">Admin</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                <span data-i18n="mobile_profile">Profile</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="env.js"></script>
+    <script src="main.js"></script>
+    <script>
+        let bookingDetails = null;
+        let patientData = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBookingDetails();
+            setupFormValidation();
+        });
+
+        document.addEventListener('mediconnect:language-change', function() {
+            if (bookingDetails) {
+                loadBookingDetails();
+                if (document.getElementById('confirmation-screen').classList.contains('hidden') === false) {
+                    populateConfirmationDetails();
+                }
+            }
+        });
+
+        function loadBookingDetails() {
+            bookingDetails = JSON.parse(localStorage.getItem('bookingDetails') || '{}');
+            
+            if (!bookingDetails.doctorId) {
+                window.location.href = 'search.html';
+                return;
+            }
+            
+            // Populate appointment summary
+            document.getElementById('summary-doctor').textContent = bookingDetails.doctorName;
+            document.getElementById('summary-specialty').textContent = bookingDetails.specialty;
+            document.getElementById('summary-date').textContent = formatDate(bookingDetails.date);
+            document.getElementById('summary-time').textContent = bookingDetails.time;
+            document.getElementById('summary-fee').textContent = `$${bookingDetails.consultationFee}`;
+
+            const medilabPanel = document.querySelector('[data-medilab-intent="prep"]');
+            if (medilabPanel) {
+                medilabPanel.dataset.medilabContext = JSON.stringify({
+                    doctor: bookingDetails.doctorName,
+                    specialty: bookingDetails.specialty,
+                    date: bookingDetails.date,
+                    time: bookingDetails.time,
+                    fee: bookingDetails.consultationFee
+                });
+            }
+        }
+
+        function setupFormValidation() {
+            const form = document.getElementById('patient-form');
+            
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    submitBooking();
+                }
+            });
+            
+            // Real-time validation
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    clearFieldError(this);
+                });
+            });
+        }
+
+        function validateForm() {
+            let isValid = true;
+            const form = document.getElementById('patient-form');
+            const requiredFields = form.querySelectorAll('[required]');
+            
+            requiredFields.forEach(field => {
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+            
+            // Validate email format
+            const email = document.getElementById('email');
+            if (email.value && !isValidEmail(email.value)) {
+                showFieldError(email, 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            // Validate phone format
+            const phone = document.getElementById('phone');
+            if (phone.value && !isValidPhone(phone.value)) {
+                showFieldError(phone, 'Please enter a valid phone number');
+                isValid = false;
+            }
+            
+            // Check terms acceptance
+            const terms = document.getElementById('terms');
+            if (!terms.checked) {
+                showToast('Please accept the terms and conditions');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function validateField(field) {
+            if (!field.value.trim()) {
+                showFieldError(field, 'This field is required');
+                return false;
+            }
+            
+            clearFieldError(field);
+            return true;
+        }
+
+        function showFieldError(field, message) {
+            clearFieldError(field);
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'text-red-600 text-sm mt-1 field-error';
+            errorDiv.textContent = message;
+            
+            field.parentNode.appendChild(errorDiv);
+            field.classList.add('border-red-500');
+        }
+
+        function clearFieldError(field) {
+            const errorDiv = field.parentNode.querySelector('.field-error');
+            if (errorDiv) {
+                errorDiv.remove();
+            }
+            field.classList.remove('border-red-500');
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function isValidPhone(phone) {
+            const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+            return phoneRegex.test(phone.replace(/[\s\-\(\)]/g, ''));
+        }
+
+        function submitBooking() {
+            // Collect form data
+            const form = document.getElementById('patient-form');
+            const formData = new FormData(form);
+            
+            patientData = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                dateOfBirth: formData.get('dateOfBirth'),
+                reason: formData.get('reason'),
+                notes: formData.get('notes'),
+                emergencyName: formData.get('emergencyName'),
+                emergencyPhone: formData.get('emergencyPhone')
+            };
+            
+            // Simulate booking submission
+            showLoading(true);
+            
+            setTimeout(() => {
+                // Generate appointment ID
+                const appointmentId = 'MC' + Date.now().toString().slice(-6);
+                
+                // Show confirmation screen
+                showConfirmation(appointmentId);
+                showLoading(false);
+                
+                // Show success toast
+                showToast('Appointment booked successfully!');
+                
+                // Clear booking details from localStorage
+                localStorage.removeItem('bookingDetails');
+                
+            }, 2000);
+        }
+
+        function showConfirmation(appointmentId) {
+            // Hide booking form
+            document.getElementById('booking-form').style.display = 'none';
+            
+            // Show confirmation screen
+            const confirmationScreen = document.getElementById('confirmation-screen');
+            confirmationScreen.classList.remove('hidden');
+            
+            // Populate confirmation details
+            document.getElementById('confirmation-id').textContent = appointmentId;
+            document.getElementById('confirmation-doctor').textContent = bookingDetails.doctorName;
+            document.getElementById('confirmation-datetime').textContent = 
+                `${formatDate(bookingDetails.date)} at ${bookingDetails.time}`;
+            document.getElementById('confirmation-patient').textContent = 
+                `${patientData.firstName} ${patientData.lastName}`;
+            document.getElementById('confirmation-fee').textContent = `$${bookingDetails.consultationFee}`;
+            
+            // Animate confirmation
+            anime({
+                targets: '.success-animation',
+                scale: [0.8, 1],
+                opacity: [0, 1],
+                duration: 800,
+                easing: 'easeOutQuart'
+            });
+        }
+
+        function showLoading(show) {
+            const submitBtn = document.querySelector('button[type="submit"]');
+            if (show) {
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                `;
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Confirm Booking';
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            const locale = window.getCurrentLocale ? window.getCurrentLocale() : 'en-US';
+            return date.toLocaleDateString(locale, {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        function downloadConfirmation() {
+            // Simulate PDF download
+            showToast(window.getI18nValue ? window.getI18nValue('booking_download_toast', 'Confirmation PDF downloaded') : 'Confirmation PDF downloaded');
+        }
+
+        function addToCalendar() {
+            if (!bookingDetails) return;
+
+            const start = new Date(`${bookingDetails.date}T${bookingDetails.time}`);
+            const end = new Date(start.getTime() + 30 * 60000);
+            const format = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//MediConnect//EN',
+                'BEGIN:VEVENT',
+                `UID:${Date.now()}@mediconnect`,
+                `DTSTAMP:${format(new Date())}`,
+                `DTSTART:${format(start)}`,
+                `DTEND:${format(end)}`,
+                `SUMMARY:Appointment with ${bookingDetails.doctorName}`,
+                `DESCRIPTION:Specialty: ${bookingDetails.specialty}`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\\n');
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'appointment.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            showToast(window.getI18nValue ? window.getI18nValue('booking_calendar_toast', 'Calendar event downloaded') : 'Calendar event downloaded');
+        }
+
+        function goHome() {
+            window.location.href = 'index.html';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

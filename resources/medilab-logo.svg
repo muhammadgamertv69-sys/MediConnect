@@ -1,0 +1,30 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="96" height="96" rx="24" fill="url(#bgGradient)"/>
+  <path d="M48 14C31.5 14 18 27.5 18 44C18 60.4 31.5 73.9 48 73.9C64.4 73.9 78 60.4 78 44C78 27.5 64.4 14 48 14Z" fill="url(#coreGlow)"/>
+  <path d="M29 45.5H41.5V58H54.5V45.5H67V32.5H54.5V20H41.5V32.5H29V45.5Z" fill="url(#crossGradient)"/>
+  <path d="M21 76C29.5 83.5 40.2 88 54.8 88" stroke="url(#signalStroke)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="70" cy="26" r="6" fill="url(#spark)"/>
+  <defs>
+    <linearGradient id="bgGradient" x1="0" y1="0" x2="96" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ECF6FF"/>
+      <stop offset="1" stop-color="#E6FFF1"/>
+    </linearGradient>
+    <radialGradient id="coreGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(48 44) rotate(90) scale(30)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="0.6" stop-color="#D7ECFF"/>
+      <stop offset="1" stop-color="#B7E3D0"/>
+    </radialGradient>
+    <linearGradient id="crossGradient" x1="29" y1="20" x2="67" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#007BFF"/>
+      <stop offset="1" stop-color="#28A745"/>
+    </linearGradient>
+    <linearGradient id="signalStroke" x1="21" y1="76" x2="55" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#28A745"/>
+      <stop offset="1" stop-color="#007BFF"/>
+    </linearGradient>
+    <radialGradient id="spark" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(70 26) rotate(90) scale(6)">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#7CC7FF"/>
+    </radialGradient>
+  </defs>
+</svg>

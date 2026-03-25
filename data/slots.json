@@ -1,0 +1,274 @@
+{
+  "slots": [
+    {
+      "id": 1,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 2,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-04",
+      "time": "09:30",
+      "available": false,
+      "duration": 30
+    },
+    {
+      "id": 3,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-04",
+      "time": "10:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 4,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-04",
+      "time": "10:30",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 5,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-04",
+      "time": "11:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 6,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-04",
+      "time": "08:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 7,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 8,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-04",
+      "time": "10:00",
+      "available": false,
+      "duration": 45
+    },
+    {
+      "id": 9,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-04",
+      "time": "11:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 10,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 11,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-04",
+      "time": "09:30",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 12,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-04",
+      "time": "10:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 13,
+      "doctorId": 4,
+      "doctorName": "Dr. James Wilson",
+      "date": "2025-11-04",
+      "time": "07:00",
+      "available": false,
+      "duration": 60
+    },
+    {
+      "id": 14,
+      "doctorId": 4,
+      "doctorName": "Dr. James Wilson",
+      "date": "2025-11-04",
+      "time": "08:00",
+      "available": true,
+      "duration": 60
+    },
+    {
+      "id": 15,
+      "doctorId": 4,
+      "doctorName": "Dr. James Wilson",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 60
+    },
+    {
+      "id": 16,
+      "doctorId": 5,
+      "doctorName": "Dr. Lisa Park",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 17,
+      "doctorId": 5,
+      "doctorName": "Dr. Lisa Park",
+      "date": "2025-11-04",
+      "time": "10:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 18,
+      "doctorId": 5,
+      "doctorName": "Dr. Lisa Park",
+      "date": "2025-11-04",
+      "time": "11:00",
+      "available": false,
+      "duration": 45
+    },
+    {
+      "id": 19,
+      "doctorId": 6,
+      "doctorName": "Dr. Robert Kim",
+      "date": "2025-11-04",
+      "time": "08:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 20,
+      "doctorId": 6,
+      "doctorName": "Dr. Robert Kim",
+      "date": "2025-11-04",
+      "time": "09:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 21,
+      "doctorId": 6,
+      "doctorName": "Dr. Robert Kim",
+      "date": "2025-11-04",
+      "time": "10:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 22,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-05",
+      "time": "09:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 23,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-05",
+      "time": "09:30",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 24,
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Johnson",
+      "date": "2025-11-05",
+      "time": "10:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 25,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-05",
+      "time": "08:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 26,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-05",
+      "time": "09:00",
+      "available": false,
+      "duration": 45
+    },
+    {
+      "id": 27,
+      "doctorId": 2,
+      "doctorName": "Dr. Michael Chen",
+      "date": "2025-11-05",
+      "time": "10:00",
+      "available": true,
+      "duration": 45
+    },
+    {
+      "id": 28,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-05",
+      "time": "09:00",
+      "available": true,
+      "duration": 30
+    },
+    {
+      "id": 29,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-05",
+      "time": "09:30",
+      "available": false,
+      "duration": 30
+    },
+    {
+      "id": 30,
+      "doctorId": 3,
+      "doctorName": "Dr. Emily Rodriguez",
+      "date": "2025-11-05",
+      "time": "10:00",
+      "available": true,
+      "duration": 30
+    }
+  ]
+}

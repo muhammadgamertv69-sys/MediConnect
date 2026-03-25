@@ -1,0 +1,212 @@
+{
+  "doctors": [
+    {
+      "id": 1,
+      "name": "Dr. Sarah Johnson",
+      "specialty": "Cardiology",
+      "location": "Downtown Medical Center",
+      "address": "123 Main St, Suite 200",
+      "rating": 4.8,
+      "experience": "15 years",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400&h=400&fit=crop&crop=face",
+      "about": "Dr. Johnson specializes in preventive cardiology and heart disease management. She completed her residency at Johns Hopkins Hospital and is board-certified in cardiovascular medicine.",
+      "education": "MD - Harvard Medical School",
+      "availability": [
+        "Mon-Fri 9AM-5PM",
+        "Sat 9AM-1PM"
+      ],
+      "consultationFee": 250,
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "reviews": [
+        {
+          "patient": "Michael Chen",
+          "rating": 5,
+          "comment": "Excellent doctor, very thorough and caring.",
+          "date": "2025-10-15"
+        },
+        {
+          "patient": "Lisa Rodriguez",
+          "rating": 5,
+          "comment": "Took time to explain everything clearly. Highly recommend!",
+          "date": "2025-10-10"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Dr. Michael Chen",
+      "specialty": "Dermatology",
+      "location": "Westside Clinic",
+      "address": "456 Oak Ave, Building B",
+      "rating": 4.9,
+      "experience": "12 years",
+      "image": "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&h=400&fit=crop&crop=face",
+      "about": "Dr. Chen is a board-certified dermatologist specializing in medical and cosmetic dermatology. He has extensive experience treating skin conditions and performing aesthetic procedures.",
+      "education": "MD - Stanford University School of Medicine",
+      "availability": [
+        "Mon-Wed 8AM-4PM",
+        "Thu-Fri 8AM-6PM"
+      ],
+      "consultationFee": 200,
+      "languages": [
+        "English",
+        "Mandarin"
+      ],
+      "reviews": [
+        {
+          "patient": "Jennifer Smith",
+          "rating": 5,
+          "comment": "Great dermatologist, helped with my skin issues.",
+          "date": "2025-10-20"
+        },
+        {
+          "patient": "David Wilson",
+          "rating": 4,
+          "comment": "Professional and knowledgeable.",
+          "date": "2025-10-18"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Dr. Emily Rodriguez",
+      "specialty": "Pediatrics",
+      "location": "Children's Medical Center",
+      "address": "789 Pine St, 3rd Floor",
+      "rating": 4.7,
+      "experience": "18 years",
+      "image": "resources/dr_emily_rodriguez.png",
+      "about": "Dr. Rodriguez is a compassionate pediatrician with extensive experience in child development and preventive care. She believes in a family-centered approach to healthcare.",
+      "education": "MD - UCSF School of Medicine",
+      "availability": [
+        "Mon-Fri 8AM-5PM",
+        "Sat 9AM-12PM"
+      ],
+      "consultationFee": 180,
+      "languages": [
+        "English",
+        "Spanish"
+      ],
+      "reviews": [
+        {
+          "patient": "Maria Gonzalez",
+          "rating": 5,
+          "comment": "Wonderful with children, very patient and caring.",
+          "date": "2025-10-22"
+        },
+        {
+          "patient": "Robert Johnson",
+          "rating": 4,
+          "comment": "Great doctor, kids love her.",
+          "date": "2025-10-19"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Dr. James Wilson",
+      "specialty": "Orthopedics",
+      "location": "Sports Medicine Institute",
+      "address": "321 Elm St, Suite 150",
+      "rating": 4.6,
+      "experience": "20 years",
+      "image": "resources/dr_james_wilson.png",
+      "about": "Dr. Wilson specializes in sports medicine and orthopedic surgery. He has worked with professional athletes and is an expert in joint replacement and sports injury treatment.",
+      "education": "MD - Mayo Clinic Medical School",
+      "availability": [
+        "Mon-Thu 7AM-6PM",
+        "Fri 7AM-4PM"
+      ],
+      "consultationFee": 300,
+      "languages": [
+        "English"
+      ],
+      "reviews": [
+        {
+          "patient": "Tom Anderson",
+          "rating": 5,
+          "comment": "Fixed my knee problem, excellent surgeon.",
+          "date": "2025-10-25"
+        },
+        {
+          "patient": "Sarah Mitchell",
+          "rating": 4,
+          "comment": "Very professional, good results.",
+          "date": "2025-10-21"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Dr. Lisa Park",
+      "specialty": "Neurology",
+      "location": "NeuroCare Center",
+      "address": "654 Cedar Blvd, Suite 300",
+      "rating": 4.9,
+      "experience": "16 years",
+      "image": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&h=400&fit=crop&crop=face",
+      "about": "Dr. Park is a neurologist specializing in brain and nervous system disorders. She has published numerous research papers and is known for her patient-centered approach to neurological care.",
+      "education": "MD - Johns Hopkins University",
+      "availability": [
+        "Tue-Thu 9AM-5PM",
+        "Fri 9AM-3PM"
+      ],
+      "consultationFee": 280,
+      "languages": [
+        "English",
+        "Korean"
+      ],
+      "reviews": [
+        {
+          "patient": "Kevin Lee",
+          "rating": 5,
+          "comment": "Brilliant neurologist, helped with my migraines.",
+          "date": "2025-10-24"
+        },
+        {
+          "patient": "Amy Chen",
+          "rating": 5,
+          "comment": "Very thorough and caring doctor.",
+          "date": "2025-10-20"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Dr. Robert Kim",
+      "specialty": "Internal Medicine",
+      "location": "Central Medical Plaza",
+      "address": "987 Birch St, 5th Floor",
+      "rating": 4.8,
+      "experience": "14 years",
+      "image": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&h=400&fit=crop&crop=face",
+      "about": "Dr. Kim provides comprehensive primary care for adults. He focuses on preventive medicine and chronic disease management with a holistic approach to patient wellness.",
+      "education": "MD - University of Pennsylvania",
+      "availability": [
+        "Mon-Fri 8AM-6PM"
+      ],
+      "consultationFee": 220,
+      "languages": [
+        "English",
+        "Korean"
+      ],
+      "reviews": [
+        {
+          "patient": "Steven Brown",
+          "rating": 5,
+          "comment": "Excellent primary care physician.",
+          "date": "2025-10-23"
+        },
+        {
+          "patient": "Helen Davis",
+          "rating": 4,
+          "comment": "Very knowledgeable and caring.",
+          "date": "2025-10-21"
+        }
+      ]
+    }
+  ]
+}
