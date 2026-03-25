@@ -1,0 +1,9 @@
+{
+  "name": "mediconnect-hci",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx http-server -p 4173 -c-1 .",
+    "build": "node build.js"
+  }
+}

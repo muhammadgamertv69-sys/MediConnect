@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediLab AI - Diagnose Now</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0A2540;
+            --success-green: #10B981;
+            --neutral-gray: #475569;
+            --light-gray: #F8FAFC;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .hero-surface {
+            background: radial-gradient(circle at 20% 20%, rgba(0, 123, 255, 0.12), rgba(40, 167, 69, 0.08));
+        }
+
+        .medilab-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 123, 255, 0.1);
+            color: #0056b3;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .medilab-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: rgba(40, 167, 69, 0.12);
+            color: #1f7a3f;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .medilab-chip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(40, 167, 69, 0.2);
+        }
+
+        .medilab-3d-shell {
+            background: radial-gradient(circle at top, rgba(255, 255, 255, 0.9), rgba(248, 249, 250, 0.6));
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 20px;
+        }
+
+        .medilab-3d-stage {
+            width: 100%;
+            height: clamp(260px, 42vw, 380px);
+            border-radius: 16px;
+            background: radial-gradient(circle at 20% 20%, rgba(0, 123, 255, 0.08), rgba(40, 167, 69, 0.05));
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-40 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="resources/logo.png" alt="MediConnect" class="h-8 w-8 mr-3">
+                    <span class="font-display font-semibold text-xl tracking-tight text-slate-900">MediConnect</span>
+                </div>
+                <div class="hidden lg:flex items-center space-x-5 text-sm font-medium">
+                    <a href="index.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap">Home</a>
+                    <a href="search.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap">Find Doctors</a>
+                    <a href="diagnose.html" class="text-indigo-700 font-semibold whitespace-nowrap">Diagnose Now</a>
+                    <a href="admin.html" class="text-slate-600 hover:text-slate-900 transition-colors whitespace-nowrap">Admin</a>
+                    <button onclick="window.location.href='search.html'"
+                        class="btn-primary text-white px-6 py-2 rounded-full font-medium shadow-sm hover:shadow-md transition-all">Book Now</button>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-surface py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <span class="medilab-badge">
+                <img src="resources/medilab-logo.svg" alt="MediLab AI" class="w-4 h-4">
+                MediLab AI
+            </span>
+            <h1 class="font-display text-4xl md:text-5xl font-bold text-gray-900 mt-4">Diagnose Now</h1>
+            <p class="text-lg text-gray-600 mt-4 max-w-3xl">
+                Focused triage guidance first, then explore the interactive signal view. MediLab AI supports your
+                decision-making
+                with safe, non-diagnostic guidance.
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="medilab-panel" data-medilab-panel data-medilab-intent="triage" data-animate="fade-up">
+                <div class="flex items-center justify-between mb-6">
+                    <span class="medilab-badge">
+                        <img src="resources/medilab-logo.svg" alt="MediLab AI" class="w-4 h-4">
+                        MediLab AI
+                    </span>
+                    <span class="medilab-key-badge" data-medilab-key-status>API key not set</span>
+                </div>
+                <h2 class="font-display text-2xl font-semibold text-gray-900 mb-3">Instant Care Triage</h2>
+                <p class="text-gray-600 mb-6">
+                    Describe symptoms in your own words. MediLab AI suggests next steps, urgency level,
+                    and a matching specialty without replacing professional advice.
+                </p>
+                <form class="space-y-4">
+                    <textarea class="medilab-input" rows="4" data-medilab-input
+                        placeholder="Example: sharp chest pain after exercise, shortness of breath, started yesterday"></textarea>
+                    <div class="flex flex-wrap gap-2">
+                        <button type="button" class="medilab-chip"
+                            data-medilab-sample="Persistent cough, sore throat, and mild fever for 3 days.">
+                            Respiratory
+                        </button>
+                        <button type="button" class="medilab-chip"
+                            data-medilab-sample="Recurring headaches with light sensitivity and nausea.">
+                            Neuro
+                        </button>
+                        <button type="button" class="medilab-chip"
+                            data-medilab-sample="Skin rash with itching after new medication.">
+                            Dermatology
+                        </button>
+                    </div>
+                    <button type="submit" class="btn-primary text-white px-6 py-3 rounded-lg font-semibold">
+                        Generate Triage Plan
+                    </button>
+                </form>
+                <div class="mt-6 medilab-output" data-medilab-output aria-live="polite">
+                    <p class="text-gray-500 text-sm">MediLab AI output will appear here.</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                <div class="medilab-3d-shell" data-animate="fade-up">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-sm font-semibold text-blue-600">AI Viral Watch</p>
+                            <h3 class="font-display text-xl font-semibold text-gray-900">Community Viral Disease Pulse
+                            </h3>
+                        </div>
+                        <span class="text-xs text-gray-500">AI-summarized snapshot</span>
+                    </div>
+                    <canvas id="viral-canvas" class="medilab-3d-stage"></canvas>
+                    <div class="mt-4 text-xs text-gray-500" id="viral-summary">
+                        AI Summary: Flu-like illness is trending upward, RSV is stable, and COVID-like activity is
+                        easing.
+                    </div>
+                    <div class="mt-3 flex flex-wrap gap-2" id="viral-tags"></div>
+                </div>
+                <div class="bg-white rounded-2xl p-8 shadow-lg medilab-howto-card">
+                    <h3 class="font-display text-xl font-semibold text-gray-900 mb-4">How to Use MediLab AI</h3>
+                    <ul class="space-y-3 text-gray-600">
+                        <li>1) Describe symptoms and timing.</li>
+                        <li>2) Review urgency and suggested specialty.</li>
+                        <li>3) Book a doctor with confidence.</li>
+                        <li>4) Review viral trend insights before booking.</li>
+                    </ul>
+                    <p class="text-sm text-gray-500 mt-6">
+                        MediLab AI is for guidance only and does not provide a diagnosis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="env.js"></script>
+    <script src="main.js"></script>
+    <script>
+        const canvas = document.getElementById('viral-canvas');
+        const ctx = canvas.getContext('2d');
+        const summary = document.getElementById('viral-summary');
+        const tags = document.getElementById('viral-tags');
+
+        const viralSeries = {
+            flu: { label: 'Flu-like illness', color: 'rgba(37, 99, 235, 0.9)', data: [22, 26, 29, 35, 42, 47, 52] },
+            rsv: { label: 'RSV', color: 'rgba(14, 116, 144, 0.9)', data: [18, 19, 21, 23, 24, 23, 22] },
+            covid: { label: 'COVID-like', color: 'rgba(16, 185, 129, 0.9)', data: [34, 32, 30, 28, 26, 25, 24] }
+        };
+
+        function resizeCanvas() {
+            canvas.width = canvas.clientWidth * window.devicePixelRatio;
+            canvas.height = canvas.clientHeight * window.devicePixelRatio;
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+        }
+
+        function drawChart() {
+            const width = canvas.clientWidth;
+            const height = canvas.clientHeight;
+            ctx.clearRect(0, 0, width, height);
+
+            const paddingX = 24;
+            const paddingY = 28;
+            const chartWidth = width - paddingX * 2;
+            const chartHeight = height - paddingY * 2;
+
+            ctx.strokeStyle = 'rgba(15, 23, 42, 0.12)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(paddingX, paddingY);
+            ctx.lineTo(paddingX, height - paddingY);
+            ctx.lineTo(width - paddingX, height - paddingY);
+            ctx.stroke();
+
+            const allValues = Object.values(viralSeries).flatMap(series => series.data);
+            const maxValue = Math.max(...allValues, 60);
+            const minValue = Math.min(...allValues, 0);
+
+            ctx.strokeStyle = 'rgba(148, 163, 184, 0.3)';
+            [0.25, 0.5, 0.75].forEach(step => {
+                const y = paddingY + chartHeight * step;
+                ctx.beginPath();
+                ctx.moveTo(paddingX, y);
+                ctx.lineTo(width - paddingX, y);
+                ctx.stroke();
+            });
+
+            Object.values(viralSeries).forEach(series => {
+                const points = series.data.map((value, index) => {
+                    const x = paddingX + (index / (series.data.length - 1)) * chartWidth;
+                    const ratio = (value - minValue) / (maxValue - minValue || 1);
+                    const y = height - paddingY - ratio * chartHeight;
+                    return { x, y, value };
+                });
+
+                const gradient = ctx.createLinearGradient(0, paddingY, 0, height - paddingY);
+                gradient.addColorStop(0, series.color.replace('0.9', '0.25'));
+                gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+                ctx.beginPath();
+                points.forEach((point, index) => {
+                    if (index === 0) ctx.moveTo(point.x, point.y);
+                    else ctx.lineTo(point.x, point.y);
+                });
+                ctx.lineTo(points[points.length - 1].x, height - paddingY);
+                ctx.lineTo(points[0].x, height - paddingY);
+                ctx.closePath();
+                ctx.fillStyle = gradient;
+                ctx.fill();
+
+                ctx.strokeStyle = series.color;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                points.forEach((point, index) => {
+                    if (index === 0) ctx.moveTo(point.x, point.y);
+                    else ctx.lineTo(point.x, point.y);
+                });
+                ctx.stroke();
+
+                points.forEach(point => {
+                    const radius = 4;
+                    ctx.fillStyle = series.color;
+                    ctx.beginPath();
+                    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            });
+
+            const legendX = paddingX + 8;
+            let legendY = paddingY + 8;
+            ctx.font = '12px Inter, sans-serif';
+            Object.values(viralSeries).forEach(series => {
+                ctx.fillStyle = series.color;
+                ctx.fillRect(legendX, legendY - 8, 10, 10);
+                ctx.fillStyle = 'rgba(15, 23, 42, 0.7)';
+                ctx.fillText(series.label, legendX + 16, legendY);
+                legendY += 18;
+            });
+        }
+
+        resizeCanvas();
+        drawChart();
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            drawChart();
+        });
+
+        function updateSummary() {
+            const flu = viralSeries.flu.data;
+            const rsv = viralSeries.rsv.data;
+            const covid = viralSeries.covid.data;
+            const fluDelta = flu[flu.length - 1] - flu[0];
+            const covidDelta = covid[covid.length - 1] - covid[0];
+            const fluTrend = fluDelta > 3 ? 'trending upward' : 'steady';
+            const covidTrend = covidDelta < -3 ? 'easing' : 'stable';
+
+            summary.textContent = `AI Summary: Flu-like illness is ${fluTrend}, RSV is stable, and COVID-like activity is ${covidTrend}.`;
+
+            tags.innerHTML = '';
+            [
+                `Flu peak: ${Math.max(...flu)}%`,
+                `RSV peak: ${Math.max(...rsv)}%`,
+                `COVID-like peak: ${Math.max(...covid)}%`
+            ].forEach(text => {
+                const tag = document.createElement('span');
+                tag.className = 'px-3 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700';
+                tag.textContent = text;
+                tags.appendChild(tag);
+            });
+        }
+
+        updateSummary();
+    </script>
+</body>
+
+</html>
